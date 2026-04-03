@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ajith Raj K S — AI/ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f7f9;
+  --bg3: #f0f0f5;
+  --border: #dddde8;
+  --border-light: #eaeaf2;
+  --text: #18181f;
+  --muted: #6b6b7a;
+  --faint: #a0a0b4;
+  --accent: #6c47ff;
+  --accent2: #8b6aff;
+  --accent-dim: rgba(108,71,255,0.08);
+  --accent-mid: rgba(108,71,255,0.15);
+  --green: #22c55e;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  mix-blend-mode: multiply;
+}
+#cursor-glow {
+  position: fixed;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(108,71,255,0.07) 0%, transparent 70%);
+}
+body:has(a:hover) #cursor,
+body:has(button:hover) #cursor { width: 20px; height: 20px; opacity: 0.6; }
+
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 999;
+  transition: width 0.08s linear;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border-bottom: 1px solid var(--border-light);
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+}
+.nav-logo {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  text-decoration: none; letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 13px; color: var(--muted); text-decoration: none;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -2px; left: 0; right: 0; height: 1px;
+  background: var(--accent); transform: scaleX(0);
+  transform-origin: left; transition: transform 0.2s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* HERO */
+#hero { padding: 148px 52px 108px; max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+
+.hero-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted);
+  background: var(--bg2); border: 1px solid var(--border-light);
+  padding: 6px 14px; border-radius: 980px; margin-bottom: 36px;
+}
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+
+.hero-name {
+  font-size: clamp(44px, 6.5vw, 72px); font-weight: 600;
+  letter-spacing: -0.035em; line-height: 1.06; margin-bottom: 22px;
+}
+.hero-name .accent-word {
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-role { font-size: 20px; font-weight: 300; color: var(--muted); margin-bottom: 28px; letter-spacing: -0.01em; line-height: 1.45; }
+.hero-role strong { color: var(--text); font-weight: 500; }
+.hero-bio { font-size: 15px; color: var(--muted); max-width: 520px; line-height: 1.82; margin-bottom: 44px; }
+
+.hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 14px; font-weight: 500; padding: 11px 24px;
+  border-radius: 980px; text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  border: none; cursor: none; letter-spacing: -0.01em; font-family: var(--font);
+}
+.btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 16px rgba(108,71,255,0.25); }
+.btn-primary:hover { background: #5538e8; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(108,71,255,0.35); }
+.btn-secondary { background: var(--bg2); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--bg3); transform: translateY(-1px); }
+
+hr { border: none; border-top: 1px solid var(--border-light); }
+
+section.c { padding: 88px 52px; max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+
+.eyebrow {
+  font-size: 11px; font-weight: 600; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.eyebrow::before { content: ''; width: 18px; height: 1.5px; background: var(--accent); border-radius: 2px; }
+.sec-h { font-size: clamp(26px,3.8vw,38px); font-weight: 600; letter-spacing: -0.025em; margin-bottom: 52px; line-height: 1.12; }
+
+/* EXPERIENCE */
+.exp-row {
+  display: grid; grid-template-columns: 190px 1fr; gap: 36px;
+  padding: 36px 0; border-bottom: 1px solid var(--border-light);
+}
+.exp-row:first-of-type { border-top: 1px solid var(--border-light); }
+.exp-when { font-size: 13px; color: var(--faint); line-height: 1.5; }
+.exp-where {
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  margin-top: 5px; background: var(--accent-dim);
+  display: inline-block; padding: 3px 10px; border-radius: 6px;
+}
+.exp-title { font-size: 17px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 10px; }
+.exp-body { font-size: 14px; color: var(--muted); line-height: 1.75; }
+.exp-highlights { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.exp-highlight {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--muted); line-height: 1.55;
+}
+.exp-highlight::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 7px;
+}
+
+/* PROJECTS */
+.proj-section-label {
+  font-size: 13px; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.02em; margin-bottom: 16px; margin-top: 48px;
+  display: flex; align-items: center; gap: 10px;
+}
+.proj-section-label:first-of-type { margin-top: 0; }
+.proj-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.proj-card {
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+  border-radius: 20px; padding: 30px;
+  transition: border-color 0.25s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.proj-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), #a78bfa);
+  opacity: 0; transition: opacity 0.3s;
+}
+.proj-card:hover { border-color: var(--border); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(108,71,255,0.1); }
+.proj-card:hover::before { opacity: 1; }
+
+.proj-idx { font-size: 11px; font-weight: 600; color: var(--faint); letter-spacing: 0.08em; margin-bottom: 14px; }
+.proj-name { font-size: 15px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 8px; line-height: 1.3; }
+.proj-desc { font-size: 13px; color: var(--muted); line-height: 1.68; margin-bottom: 18px; flex: 1; }
+.proj-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-size: 11px; font-weight: 500; padding: 3px 9px;
+  border-radius: 980px; background: var(--bg2);
+  color: var(--muted); border: 1px solid var(--border-light);
+}
+
+.gh-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  text-decoration: none; white-space: nowrap;
+  padding: 4px 10px; border-radius: 980px;
+  border: 1px solid var(--accent-mid);
+  background: var(--accent-dim);
+  transition: all 0.18s; flex-shrink: 0;
+}
+.gh-link:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.gh-link svg { width: 12px; height: 12px; }
+
+/* LIST PROJECTS (for smaller ones) */
+.proj-list { display: flex; flex-direction: column; gap: 0; }
+.proj-list-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; padding: 20px 0;
+  border-bottom: 1px solid var(--border-light);
+  align-items: center;
+}
+.proj-list-row:first-of-type { border-top: 1px solid var(--border-light); }
+.proj-list-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; }
+.proj-list-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.proj-list-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.proj-list-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* SKILLS */
+.skill-row {
+  display: grid; grid-template-columns: 170px 1fr; gap: 36px;
+  padding: 22px 0; border-bottom: 1px solid var(--border-light); align-items: start;
+}
+.skill-row:first-of-type { border-top: 1px solid var(--border-light); }
+.skill-cat { font-size: 13px; font-weight: 500; color: var(--muted); padding-top: 5px; }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-pill {
+  font-size: 13px; padding: 5px 15px; border-radius: 980px;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border-light);
+  transition: border-color 0.18s, background 0.18s, color 0.18s; cursor: default;
+}
+.skill-pill:hover { border-color: var(--accent); background: var(--accent-dim); color: var(--accent); }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+.about-copy p { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 20px; }
+.about-copy p strong { color: var(--text); font-weight: 500; }
+.about-copy p:last-child { margin-bottom: 0; }
+
+.fact-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 14px 0; border-bottom: 1px solid var(--border-light);
+  font-size: 14px; gap: 16px;
+}
+.fact-row:first-of-type { border-top: 1px solid var(--border-light); }
+.fact-label { color: var(--faint); flex-shrink: 0; }
+.fact-val { color: var(--text); font-weight: 500; text-align: right; }
+
+.edu-block {
+  margin-top: 24px; padding: 22px 24px;
+  background: var(--bg2); border: 1px solid var(--border-light);
+  border-radius: 16px; border-left: 3px solid var(--accent);
+}
+.edu-deg { font-size: 14px; font-weight: 600; margin-bottom: 5px; letter-spacing: -0.01em; }
+.edu-school { font-size: 13px; color: var(--muted); }
+
+/* CONTACT */
+#contact { padding: 88px 52px 128px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.contact-h { font-size: clamp(30px,4.5vw,50px); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
+.contact-sub { font-size: 15px; color: var(--muted); margin-bottom: 40px; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.contact-chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 14px; font-weight: 500; color: var(--text);
+  background: var(--bg2); border: 1px solid var(--border-light);
+  padding: 12px 22px; border-radius: 980px; text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+}
+.contact-chip:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,71,255,0.28); }
+.contact-chip svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+footer { border-top: 1px solid var(--border-light); padding: 24px 52px; display: flex; justify-content: space-between; align-items: center; }
+.footer-t { font-size: 13px; color: var(--faint); }
+.footer-accent { color: var(--accent); font-weight: 500; }
+
+/* FADE */
+.fade { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+.fade.in { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  body { cursor: auto; }
+  #cursor, #cursor-glow { display: none; }
+  nav { padding: 0 22px; }
+  .nav-links { display: none; }
+  #hero, section.c, #contact { padding-left: 22px; padding-right: 22px; }
+  #hero { padding-top: 110px; }
+  .exp-row { grid-template-columns: 1fr; gap: 10px; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .proj-list-row { grid-template-columns: 1fr; }
+  .skill-row { grid-template-columns: 1fr; gap: 10px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  footer { flex-direction: column; gap: 6px; text-align: center; padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-glow"></div>
+<div id="progress"></div>
+
+<nav>
+  <a class="nav-logo" href="#hero"><span class="nav-dot"></span>Ajith Raj</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-status fade"><span class="status-dot"></span>Open to AI/ML roles & research collaborations</div>
+  <h1 class="hero-name fade" style="transition-delay:.06s">Ajith Raj K S —<br><span class="accent-word">AI/ML Engineer</span></h1>
+  <p class="hero-role fade" style="transition-delay:.12s"><strong>Research Intern · IISc Bengaluru</strong> · Open Source Contributor</p>
+  <p class="hero-bio fade" style="transition-delay:.18s">I build intelligent systems at the intersection of machine learning, natural language processing, and applied research. Currently contributing to interactive game systems and ML pipelines at IISc, while actively engaging with the open source community.</p>
+  <div class="hero-actions fade" style="transition-delay:.24s">
+    <a class="btn btn-primary" href="#projects">View projects</a>
+    <a class="btn btn-secondary" href="https://github.com/ajithhraj" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a class="btn btn-secondary" href="#" onclick="dlResume(event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Resume
+    </a>
+  </div>
+</div>
+
+<hr/>
+
+<!-- EXPERIENCE -->
+<section class="c" id="experience">
+  <div class="eyebrow fade">Experience</div>
+  <h2 class="sec-h fade">Where I've worked</h2>
+
+  <div class="exp-row fade">
+    <div>
+      <div class="exp-when">Nov 2025 – Present</div>
+      <div class="exp-where">IISc · Bengaluru</div>
+    </div>
+    <div>
+      <div class="exp-title">Research Intern — Game Developer</div>
+      <p class="exp-body">Working within a multidisciplinary research team at the Centre for Product Design & Manufacturing, contributing to an interactive serious game built for defence research applications.</p>
+      <div class="exp-highlights">
+        <div class="exp-highlight">Designed and maintained asset pipelines, ensuring efficient delivery of 3D content across the development workflow</div>
+        <div class="exp-highlight">Led technical art, character animations, and in-engine cinematics from concept through final integration</div>
+        <div class="exp-highlight">Collaborated with researchers and engineers to align game mechanics with research objectives</div>
+        <div class="exp-highlight">Contributed to tooling and automation for the game's content production pipeline</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- PROJECTS -->
+<section class="c" id="projects">
+  <div class="eyebrow fade">Projects</div>
+  <h2 class="sec-h fade">Things I've built</h2>
+
+  <!-- Open Source -->
+  <div class="proj-section-label fade">Open source — C2SI Imagelab</div>
+  <div class="proj-grid">
+    <div class="proj-card fade">
+      <div class="proj-idx">GSoC 2026</div>
+      <div class="proj-name">Pipeline Feature Suite</div>
+      <p class="proj-desc">Proposed and implemented five core features for the Imagelab image processing pipeline — per-step previews, histogram analysis, pipeline persistence, batch processing, and composite macro operators.</p>
+      <div class="proj-footer">
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Image Processing</span></div>
+        <a class="gh-link" href="https://github.com/c2siorg/imagelab" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View repo
+        </a>
+      </div>
+    </div>
+    <div class="proj-card fade" style="transition-delay:.07s">
+      <div class="proj-idx">Merged PRs</div>
+      <div class="proj-name">Bug Fixes & Contributions</div>
+      <p class="proj-desc">Multiple PRs merged into the Imagelab repository — including BoxFilter implementation fix and hex_to_bgr color conversion correction. Found issues through systematic code review and testing.</p>
+      <div class="proj-footer">
+        <div class="proj-tags"><span class="tag">Java</span><span class="tag">OpenCV</span><span class="tag">Testing</span></div>
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ML Projects -->
+  <div class="proj-section-label fade">Machine learning projects</div>
+  <div class="proj-list fade">
+    <div class="proj-list-row">
+      <div>
+        <div class="proj-list-name">AI Healthcare Receptionist</div>
+        <p class="proj-list-desc">Automated patient query handling and appointment support via intent classification, reducing manual front-desk dependency through NLP-driven conversation flow.</p>
+        <div class="proj-list-tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">REST API</span><span class="tag">Intent Classification</span></div>
+      </div>
+      <div class="proj-list-actions">
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="proj-list-row">
+      <div>
+        <div class="proj-list-name">Breast Cancer Detection</div>
+        <p class="proj-list-desc">Supervised ML model classifying malignant vs benign tumors to support early diagnostic decision-making, with a precision–recall trade-off analysis.</p>
+        <div class="proj-list-tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Classification</span><span class="tag">ML</span></div>
+      </div>
+      <div class="proj-list-actions">
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="proj-list-row">
+      <div>
+        <div class="proj-list-name">Market Basket Analysis</div>
+        <p class="proj-list-desc">Mined frequent item sets and association rules from transaction data to extract customer purchasing patterns for data-driven product recommendations.</p>
+        <div class="proj-list-tags"><span class="tag">Python</span><span class="tag">Apriori</span><span class="tag">Data Mining</span><span class="tag">Weka</span></div>
+      </div>
+      <div class="proj-list-actions">
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="proj-list-row">
+      <div>
+        <div class="proj-list-name">Leaf Disease Detection</div>
+        <p class="proj-list-desc">CNN-based model detecting plant diseases from leaf images, enabling early agricultural intervention through computer vision classification.</p>
+        <div class="proj-list-tags"><span class="tag">Python</span><span class="tag">CNN</span><span class="tag">Computer Vision</span><span class="tag">Deep Learning</span></div>
+      </div>
+      <div class="proj-list-actions">
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="proj-list-row">
+      <div>
+        <div class="proj-list-name">AIrcade Pong — Q-Learning Agent</div>
+        <p class="proj-list-desc">Streamlit-based reinforcement learning demo where a Q-learning agent learns to play Pong. Iterative UI and gameplay improvements with live training visualisation.</p>
+        <div class="proj-list-tags"><span class="tag">Python</span><span class="tag">Reinforcement Learning</span><span class="tag">Q-Learning</span><span class="tag">Streamlit</span></div>
+      </div>
+      <div class="proj-list-actions">
+        <a class="gh-link" href="https://github.com/ajithhraj" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- SKILLS -->
+<section class="c" id="skills">
+  <div class="eyebrow fade">Skills</div>
+  <h2 class="sec-h fade">What I work with</h2>
+  <div class="skill-row fade"><div class="skill-cat">AI / ML</div><div class="skill-pills"><span class="skill-pill">Machine Learning</span><span class="skill-pill">Deep Learning</span><span class="skill-pill">NLP</span><span class="skill-pill">Computer Vision</span><span class="skill-pill">Generative AI</span><span class="skill-pill">LLMs</span><span class="skill-pill">RAG</span><span class="skill-pill">Agentic AI</span><span class="skill-pill">Reinforcement Learning</span><span class="skill-pill">Scikit-learn</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">OpenCV</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Programming</div><div class="skill-pills"><span class="skill-pill">Python</span><span class="skill-pill">Java</span><span class="skill-pill">SQL</span><span class="skill-pill">JavaScript</span><span class="skill-pill">HTML / CSS</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Data & Analytics</div><div class="skill-pills"><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">Matplotlib</span><span class="skill-pill">Data Mining</span><span class="skill-pill">Association Rules</span><span class="skill-pill">Weka</span><span class="skill-pill">Apache Spark</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Tools & Infra</div><div class="skill-pills"><span class="skill-pill">Git</span><span class="skill-pill">REST APIs</span><span class="skill-pill">Streamlit</span><span class="skill-pill">Spring</span><span class="skill-pill">VS Code</span><span class="skill-pill">PyCharm</span><span class="skill-pill">Android Studio</span><span class="skill-pill">RPA</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Databases</div><div class="skill-pills"><span class="skill-pill">MySQL</span><span class="skill-pill">SQL Server</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Creative & Game</div><div class="skill-pills"><span class="skill-pill">Pipeline Engineering</span><span class="skill-pill">Technical Art</span><span class="skill-pill">Cinematics</span><span class="skill-pill">3D Animation</span><span class="skill-pill">Premiere Pro</span><span class="skill-pill">After Effects</span><span class="skill-pill">Photoshop</span><span class="skill-pill">Lightroom</span></div></div>
+  <div class="skill-row fade"><div class="skill-cat">Systems</div><div class="skill-pills"><span class="skill-pill">Windows</span><span class="skill-pill">Linux</span><span class="skill-pill">OOP</span></div></div>
+</section>
+
+<hr/>
+
+<!-- ABOUT -->
+<section class="c" id="about">
+  <div class="eyebrow fade">About</div>
+  <h2 class="sec-h fade">A bit about me</h2>
+  <div class="about-grid">
+    <div class="about-copy fade">
+      <p>I'm a <strong>Computer Science graduate specialising in AI & ML</strong>, currently working as a Research Intern at the Indian Institute of Science, Bengaluru. My work sits at the intersection of applied machine learning, interactive systems, and research-driven engineering.</p>
+      <p>I gravitate toward problems where <strong>intelligent systems can drive meaningful outcomes</strong> — whether that's building NLP pipelines that reduce operational overhead, training computer vision models for early detection tasks, or contributing to open source infrastructure that other engineers rely on. I take the full stack seriously: from data preprocessing and model design through to deployment and integration.</p>
+      <p>I'm an active open source contributor — currently engaged with the <strong>C2SI Imagelab</strong> project as a GSoC 2026 applicant, with multiple PRs merged prior to proposal submission. I approach every codebase the same way: understand it deeply, find what's broken, fix it cleanly.</p>
+      <p>Outside of engineering, I work professionally as a <strong>videographer and editor</strong> — a practice that sharpens how I think about user experience, pacing, and visual communication in the products I build.</p>
+    </div>
+    <div class="fade" style="transition-delay:.1s">
+      <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Bengaluru, India</span></div>
+      <div class="fact-row"><span class="fact-label">Currently at</span><span class="fact-val">IISc CPDM Lab</span></div>
+      <div class="fact-row"><span class="fact-label">Open source</span><span class="fact-val">C2SI · GSoC 2026</span></div>
+      <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val">ajithrxj@gmail.com</span></div>
+      <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-val">github.com/ajithhraj</span></div>
+      <div class="fact-row"><span class="fact-label">Languages</span><span class="fact-val">English, ಕನ್ನಡ, తెలుగు, हिंदी</span></div>
+      <div class="edu-block">
+        <div class="edu-deg">B.E. Computer Science (AI & ML)</div>
+        <div class="edu-school">Nagarjuna College of Engineering & Technology · 2021–2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="eyebrow fade" style="justify-content:center">Contact</div>
+  <h2 class="contact-h fade">Let's work together</h2>
+  <p class="contact-sub fade">Open to AI/ML roles, research collaborations, and interesting projects. I reply fast.</p>
+  <div class="contact-links fade">
+    <a class="contact-chip" href="mailto:ajithrxj@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      ajithrxj@gmail.com
+    </a>
+    <a class="contact-chip" href="https://linkedin.com/in/ajithhraj" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      linkedin/ajithhraj
+    </a>
+    <a class="contact-chip" href="https://github.com/ajithhraj" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      github/ajithhraj
+    </a>
+    <a class="contact-chip" href="tel:+917019168181">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 70191 68181
+    </a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-t">Ajith Raj K S</span>
+  <span class="footer-t">Made with <span class="footer-accent">♥</span> · Bengaluru 2026</span>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const glow = document.getElementById('cursor-glow');
+let mx = 0, my = 0, gx = 0, gy = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+(function animGlow() {
+  gx += (mx - gx) * 0.08;
+  gy += (my - gy) * 0.08;
+  glow.style.left = gx + 'px';
+  glow.style.top = gy + 'px';
+  requestAnimationFrame(animGlow);
+})();
+
+const bar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (window.scrollY / max * 100) + '%';
+}, { passive: true });
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+function dlResume(e) {
+  e.preventDefault();
+  const txt = `AJITH RAJ K S
+ajithrxj@gmail.com | +91 70191-68181 | linkedin.com/in/ajithhraj | github.com/ajithhraj
+
+OBJECTIVE
+AI/ML engineer with hands-on research experience, seeking to build practical, scalable intelligent systems.
+
+EXPERIENCE
+Research Intern — IISc CPDM Lab, Bengaluru (Nov 2025 – Present)
+  Working within a multidisciplinary research team on an interactive serious game for defence research.
+  - Designed and maintained asset pipelines for 3D content delivery
+  - Led technical art, character animations, and in-engine cinematics
+  - Contributed to tooling and automation for content production pipeline
+
+EDUCATION
+B.E. Computer Science (AI & ML)
+Nagarjuna College of Engineering & Technology | 2021–2025
+
+PROJECTS
+Open Source — C2SI Imagelab (GSoC 2026 applicant, multiple PRs merged)
+- AI Healthcare Receptionist — Python, NLP, REST API
+- Breast Cancer Detection — Python, Scikit-learn, ML
+- Market Basket Analysis — Python, Apriori, Data Mining
+- Leaf Disease Detection — Python, CNN, Computer Vision
+- AIrcade Pong — Python, Reinforcement Learning, Q-Learning, Streamlit
+
+SKILLS
+AI/ML: Machine Learning, Deep Learning, NLP, Computer Vision, Generative AI, LLMs, RAG, Agentic AI, Reinforcement Learning
+Libraries: Scikit-learn, TensorFlow, OpenCV, Pandas, NumPy, Matplotlib
+Programming: Python, Java, SQL, JavaScript, HTML/CSS
+Tools: Git, REST APIs, Streamlit, Spring, VS Code, Apache Spark
+Databases: MySQL, SQL Server
+Creative: Pipeline Engineering, Technical Art, Cinematics, Animation, Premiere Pro, After Effects`;
+  const blob = new Blob([txt], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Ajith_Raj_KS_Resume.txt';
+  a.click();
+}
+</script>
+</body>
+</html>
